@@ -2,29 +2,54 @@ import { JwtPayload, jwtDecode } from 'jwt-decode';
 
 class AuthService {
   getProfile() {
-    // TODO: return the decoded token
+    // ✅ Safely decode token with try/catch
+    try {
+      const token = this.getToken();
+      if (!token) return null;
+      return jwtDecode<JwtPayload & { username: string }>(token);
+    } catch (err) {
+      console.error('Error decoding token:', err);
+      return null;
+    }
   }
 
   loggedIn() {
-    // TODO: return a value that indicates if the user is logged in
+    // ✅ Same logic - checks if token exists and isn't expired
+    const token = this.getToken();
+    return !!token && !this.isTokenExpired(token);
   }
-  
+
   isTokenExpired(token: string) {
-    // TODO: return a value that indicates if the token is expired
+    // ✅ Assume expired if decoding fails
+    try {
+      const decoded = jwtDecode<JwtPayload>(token);
+      if (decoded?.exp && decoded.exp < Date.now() / 1000) {
+        return true;
+      }
+      return false;
+    } catch (err) {
+      console.error('Error decoding token:', err);
+      return true;  // Safer to assume expired if decode fails
+    }
   }
 
   getToken(): string {
-    // TODO: return the token
+    // ✅ Use `jwt_token` instead of `id_token`
+    return localStorage.getItem("jwt_token") || "";
   }
 
   login(idToken: string) {
-    // TODO: set the token to localStorage
-    // TODO: redirect to the home page
+    // ✅ Store token under `jwt_token`
+    localStorage.setItem("jwt_token", idToken);
+    // ✅ Redirect to the main page
+    window.location.assign("/");
   }
 
   logout() {
-    // TODO: remove the token from localStorage
-    // TODO: redirect to the login page
+    // ✅ Clear `jwt_token`
+    localStorage.removeItem("jwt_token");
+    // ✅ Redirect to login page
+    window.location.assign("/login");
   }
 }
 

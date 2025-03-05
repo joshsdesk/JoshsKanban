@@ -1,13 +1,11 @@
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css';
-
-import App from './App.tsx';
-import Board from './pages/Board.tsx';
-import ErrorPage from './pages/ErrorPage.tsx';
-import EditTicket from './pages/EditTicket.tsx';
-import CreateTicket from './pages/CreateTicket.tsx';
-import Login from './pages/Login.tsx';
+import { createBrowserRouter } from 'react-router-dom';
+import App from './App';
+import Login from './pages/Login';
+import Board from './pages/Board';
+import CreateTicket from './pages/CreateTicket';
+import EditTicket from './pages/EditTicket';
+import ErrorPage from './pages/ErrorPage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -16,26 +14,28 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
-        element: <Board />
-      }, 
-      {
-        path: '/edit',
-        element: <EditTicket />
-      },
-      {
-        path: '/create',
-        element: <CreateTicket />
-      },
-      {
-        path: '/login',
+        path: 'login',
         element: <Login />
+      },
+      {
+        element: <ProtectedRoute />,  // ✅ Protect all these child routes
+        children: [
+          {
+            index: true,  // Makes `/` point to the Board
+            element: <Board />
+          },
+          {
+            path: 'create',
+            element: <CreateTicket />
+          },
+          {
+            path: 'edit',
+            element: <EditTicket />
+          }
+        ]
       }
     ]
   }
-])
+]);
 
-const rootElement = document.getElementById('root');
-if (rootElement) {
-  ReactDOM.createRoot(rootElement).render(<RouterProvider router={router} />);
-}
+export default router;
