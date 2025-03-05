@@ -1,7 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { User } from '../models/user.js';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -9,7 +8,7 @@ dotenv.config();
 const router = Router();
 const SECRET_KEY = process.env.JWT_SECRET_KEY as string;
 
-// Login Handler - Cleaned and Completed
+// Login Handler - No bcrypt version
 const login = async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
@@ -20,9 +19,8 @@ const login = async (req: Request, res: Response) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-
-    if (!isPasswordValid) {
+    // Simple password check - no hashing
+    if (user.password !== password) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
@@ -35,7 +33,7 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
-// POST /login - Attach the login handler directly (clean structure)
+// POST /login
 router.post('/login', login);
 
 export default router;
