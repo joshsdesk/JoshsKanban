@@ -1,30 +1,31 @@
 import TicketCard from './TicketCard';
 import { TicketData } from '../interfaces/TicketData';
 import { ApiMessage } from '../interfaces/ApiMessage';
+import styles from '../styles/Swimlane.module.css';
 
 interface SwimlaneProps {
   title: string;
   tickets: TicketData[];
-  deleteTicket: (ticketId: number) => Promise<ApiMessage>
+  deleteTicket: (ticketId: number) => Promise<ApiMessage>;
 }
 
 const Swimlane = ({ title, tickets, deleteTicket }: SwimlaneProps) => {
-  const getStatusClass = (status: string) => {
-    switch (status) {
+  const getLaneClass = () => {
+    switch (title) {
       case 'Todo':
-        return 'swim-lane todo';
+        return styles.todo;
       case 'In Progress':
-        return 'swim-lane inprogress';
+        return styles.inProgress;
       case 'Done':
-        return 'swim-lane done';
+        return styles.done;
       default:
-        return 'swim-lane';
+        return '';
     }
   };
 
   return (
-    <div className={`swimlane ${getStatusClass(title)}`}>
-      <h2>{title}</h2>
+    <div className={`${styles.swimlane} ${getLaneClass()}`}>
+      <h2 className={styles.title}>{title}</h2>
       {tickets.map(ticket => (
         <TicketCard 
           key={ticket.id}

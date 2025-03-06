@@ -1,4 +1,6 @@
-import { createBrowserRouter } from 'react-router-dom';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import Login from './pages/Login';
 import Board from './pages/Board';
@@ -18,10 +20,10 @@ const router = createBrowserRouter([
         element: <Login />
       },
       {
-        element: <ProtectedRoute />,  // ✅ Protect all these child routes
+        element: <ProtectedRoute />,
         children: [
           {
-            index: true,  // Makes `/` point to the Board
+            index: true,
             element: <Board />
           },
           {
@@ -37,5 +39,11 @@ const router = createBrowserRouter([
     ]
   }
 ]);
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
 
 export default router;

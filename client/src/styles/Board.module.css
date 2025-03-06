@@ -1,0 +1,54 @@
+/* /src/styles/Board.module.css */
+
+.loginNotice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.board {
+    width: 100%;
+    padding: 1rem;
+    background-color: #121212;
+    color: white;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.boardHeader {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.newTicketButton {
+    background-color: #b864c4;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.newTicketButton:hover {
+    background-color: #ff80ff;
+}
+
+.boardDisplay {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .boardDisplay {
+        flex-direction: column;
+    }
+}
+

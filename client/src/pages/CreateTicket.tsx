@@ -4,6 +4,7 @@ import { createTicket } from '../api/ticketAPI';
 import { TicketData } from '../interfaces/TicketData';
 import { UserData } from '../interfaces/UserData';
 import { retrieveUsers } from '../api/userAPI';
+import styles from "../styles/CreateTicket.module.css";
 
 const CreateTicket = () => {
   const [newTicket, setNewTicket] = useState<TicketData | undefined>(

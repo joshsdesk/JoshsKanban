@@ -1,45 +1,53 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import auth from '../utils/auth';
+import styles from '../styles/Navbar.module.css';
 
 const Navbar = () => {
-  const [ loginCheck, setLoginCheck ] = useState(false);
+  const [loginCheck, setLoginCheck] = useState(false);
 
   const checkLogin = () => {
-    if(auth.loggedIn()) {
+    if (auth.loggedIn()) {
       setLoginCheck(true);
+    } else {
+      setLoginCheck(false); // Explicitly reset if logged out
     }
   };
 
   useEffect(() => {
-    console.log(loginCheck);
     checkLogin();
-  }, [loginCheck])
+  }, [loginCheck]);
 
   return (
-    <div className='nav'>
-      <div className='nav-title'>
-        <Link to='/'>Krazy Kanban Board</Link>
+    <nav className={styles.navbar}>
+      <div className={styles.navbarTitle}>
+        <Link to="/" className={styles.navbarBrand}>JoshsKanban Board</Link>
       </div>
-      <ul>
-      {
-        !loginCheck ? (
-          <li className='nav-item'>
-            <button type='button'>
-              <Link to='/login'>Login</Link>
-            </button>
+      <ul className={styles.navLinks}>
+        {loginCheck && (
+          <li className={styles.navItem}>
+            <Link to="/create" className={styles.navButton}>New Ticket</Link>
+          </li>
+        )}
+
+        {!loginCheck ? (
+          <li className={styles.navItem}>
+            <Link to="/login" className={styles.navButton}>Login</Link>
           </li>
         ) : (
-          <li className='nav-item'>
-            <button type='button' onClick={() => {
-              auth.logout();
-            }}>Logout</button>
+          <li className={styles.navItem}>
+            <button
+              type="button"
+              className={styles.navButton}
+              onClick={() => auth.logout()}
+            >
+              Logout
+            </button>
           </li>
-        )
-      }
+        )}
       </ul>
-    </div>
-  )
-}
+    </nav>
+  );
+};
 
 export default Navbar;

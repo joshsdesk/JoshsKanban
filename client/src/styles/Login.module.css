@@ -1,0 +1,70 @@
+/* /src/styles/Login.module.css */
+
+.loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.loginForm {
+    background-color: #212529;
+    padding: 3rem;
+    border-radius: 12px;
+    color: white;
+    width: 100%;
+    max-width: 500px; /* Increased max-width for larger form */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    text-align: left;
+}
+
+.formTitle {
+    font-size: 2rem; /* Slightly bigger title */
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #fff;
+}
+
+.formLabel {
+    font-weight: bold;
+    color: #fff;
+}
+
+.formInput {
+    padding: 0.75rem;
+    border: 1px solid #444;
+    background-color: #333;
+    color: white;
+    border-radius: 6px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.submitButton {
+    padding: 0.75rem;
+    background-color: #b864c4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+    background-color: #ff80ff;
+}
+
+.errorMessage {
+    color: #ff4d4d;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 1rem;
+}

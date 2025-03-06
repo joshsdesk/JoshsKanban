@@ -1,0 +1,54 @@
+/* /src/styles/Swimlane.module.css */
+
+.swimlane {
+    flex: 1;
+    min-width: 300px;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    max-height: calc(100vh - 6rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-sizing: border-box;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Subtle zoom and shadow on hover */
+.swimlane:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+/* Darker background colors for better contrast */
+.todo {
+    background-color: #b583d1;
+    border: 1px solid #8d4caf;
+}
+
+.inProgress {
+    background-color: #9d65c9;
+    border: 1px solid #7a49a5;
+}
+
+.done {
+    background-color: #7a49a5;
+    border: 1px solid #5c2d84;
+}
+
+/* For responsiveness */
+@media (max-width: 768px) {
+    .swimlane {
+        max-width: 100%;
+    }
+}
