@@ -8,6 +8,7 @@ import CreateTicket from './pages/CreateTicket';
 import EditTicket from './pages/EditTicket';
 import ErrorPage from './pages/ErrorPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import './index.css';
 
 const router = createBrowserRouter([
   {
