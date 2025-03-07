@@ -4,7 +4,7 @@ import { createTicket } from '../api/ticketAPI';
 import { TicketData } from '../interfaces/TicketData';
 import { UserData } from '../interfaces/UserData';
 import { retrieveUsers } from '../api/userAPI';
-import styles from "../styles/CreateTicket.module.css";
+import styles from '../styles/CreateTicket.module.css';
 
 const CreateTicket = () => {
   const [newTicket, setNewTicket] = useState<TicketData | undefined>(
@@ -61,40 +61,43 @@ const CreateTicket = () => {
 
   return (
     <>
-      <div className='container'>
-        <form className='form' onSubmit=
-        {handleSubmit}>
-          <h1>Create Ticket</h1>
-          <label htmlFor='tName'>Ticket Name</label>
+      <div className={styles.container}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <h1 className={styles.formTitle}>Create Ticket</h1>
+          <label htmlFor='tName' className={styles.label}>Ticket Name</label>
           <textarea 
             id='tName'
             name='name'
             value={newTicket?.name || ''}
             onChange={handleTextAreaChange}
-            />
-          <label htmlFor='tStatus'>Ticket Status</label>
+            className={styles.input}
+          />
+          <label htmlFor='tStatus' className={styles.label}>Ticket Status</label>
           <select 
             name='status' 
             id='tStatus'
             value={newTicket?.status || ''}
             onChange={handleTextChange}
+            className={styles.input}
           >
             <option value='Todo'>Todo</option>
             <option value='In Progress'>In Progress</option>
             <option value='Done'>Done</option>
           </select>
-          <label htmlFor='tDescription'>Ticket Description</label>
+          <label htmlFor='tDescription' className={styles.label}>Ticket Description</label>
           <textarea 
             id='tDescription'
             name='description'
             value={newTicket?.description || ''}
             onChange={handleTextAreaChange}
+            className={styles.input}
           />
-          <label htmlFor='tUserId'>User's ID</label>
+          <label htmlFor='tUserId' className={styles.label}>User's ID</label>
           <select
             name='assignedUserId'
-            value={newTicket?.assignedUserId || ''}
+            value={newTicket?.assignedUserId ?? ''}
             onChange={handleUserChange}
+            className={styles.input}
           >
             {users ? users.map((user) => {
               return (
@@ -108,11 +111,11 @@ const CreateTicket = () => {
               name='assignedUserId'
               value={newTicket?.assignedUserId || 0}
               onChange={handleTextAreaChange}
+              className={styles.input}
             />
-            )
-          }
+            )}
           </select>
-          <button type='submit' onSubmit={handleSubmit}>Submit Form</button>
+          <button type='submit' className={styles.submitButton}>Submit Form</button>
         </form>
       </div>
     </>

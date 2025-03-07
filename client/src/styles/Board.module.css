@@ -45,6 +45,25 @@
     justify-content: space-around;
     flex-wrap: wrap;
 }
+.controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.filterInput {
+    flex: 1;
+    padding: 0.5rem;
+}
+
+.sortSelect {
+    padding: 0.5rem;
+}
+
 
 @media (max-width: 768px) {
     .boardDisplay {

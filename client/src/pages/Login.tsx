@@ -31,13 +31,23 @@ const Login = () => {
       if (result.success) {
         Auth.login(result.token);  // Redirect handled inside AuthService
       } else {
-        setErrorMessage(result.message || 'Login failed. Please check your credentials.');
+        setErrorMessage(result.message || 'Invalid username or password.');
       }
     } catch (err) {
       console.error('Failed to login', err);
-      setErrorMessage('An unexpected error occurred. Please try again.');
+
+      if (err instanceof Error && err.message.includes('Network Error')) {
+        setErrorMessage('Cannot connect to server. Please check your connection and try again.');
+      } else {
+        setErrorMessage('An unexpected error occurred. Please try again.');
+      }
     } finally {
       setLoading(false);
+
+      // Optional: Clear error after 5 seconds for better UX (can be removed if unwanted)
+      if (errorMessage) {
+        setTimeout(() => setErrorMessage(''), 5000);
+      }
     }
   };
 
@@ -68,7 +78,11 @@ const Login = () => {
           {loading ? 'Logging in...' : 'Submit Form'}
         </button>
 
-        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
+        {errorMessage && (
+          <p className={styles.errorMessage}>
+            {errorMessage}
+          </p>
+        )}
       </form>
     </div>
   );

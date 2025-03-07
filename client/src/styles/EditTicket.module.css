@@ -1,4 +1,4 @@
-/* /src/styles/CreateTicket.module.css */
+/* /src/styles/EditTicket.module.css */
 
 .container {
     display: flex;
@@ -51,13 +51,11 @@
     box-sizing: border-box;
 }
 
-/* Make inputs and labels span both columns if needed */
 .fullWidth {
     grid-column: span 2;
 }
 
 .submitButton {
-    grid-column: span 2;
     padding: 0.75rem;
     background-color: #b864c4;
     color: white;
@@ -75,6 +73,11 @@
 
 .submitButton:hover {
     background-color: #ff80ff;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
 }
 
 /* Mobile friendly */
