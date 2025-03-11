@@ -19,7 +19,7 @@ app.use(express.static('../client/dist'));
 app.use('/api', routes);
 
 // Serve React frontend (fallback to index.html for React Router)
-app.get('*', (req, res) => {
+app.get('*', (_req, res) => {
   res.sendFile('index.html', { root: path.join(__dirname, '../client/dist') });
 });
 
