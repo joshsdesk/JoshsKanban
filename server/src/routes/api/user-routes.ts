@@ -26,7 +26,7 @@ router.put('/:id', updateUser);
 router.delete('/:id', deleteUser);
 
 // ✅ TEMP route to seed users (remove or protect later)
-router.post('/seed', async (req, res) => {
+router.post('/seed', async (_req, res) => {
   try {
     await seedUsers();
     res.status(200).json({ message: 'Users seeded successfully!' });
