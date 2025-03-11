@@ -25,7 +25,7 @@ router.put('/:id', updateUser);
 // DELETE /users/:id - Delete a user by id
 router.delete('/:id', deleteUser);
 
-// ✅ TEMP route to seed users (remove or protect later)
+// ✅ POST /users/seed - Route to seed users
 router.post('/seed', async (_req, res) => {
   try {
     await seedUsers();
