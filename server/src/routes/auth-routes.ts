@@ -8,7 +8,7 @@ dotenv.config();
 const router = Router();
 const SECRET_KEY = process.env.JWT_SECRET_KEY as string;
 
-// Login Handler - No bcrypt version
+
 const login = async (req: Request, res: Response) => {
   const { username, password } = req.body;
 

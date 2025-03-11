@@ -6,6 +6,7 @@ import {
   updateUser,
   deleteUser,
 } from '../../controllers/user-controller.js';
+import { seedUsers } from '../../seeds/user-seeds.js';
 
 const router = express.Router();
 
@@ -23,5 +24,16 @@ router.put('/:id', updateUser);
 
 // DELETE /users/:id - Delete a user by id
 router.delete('/:id', deleteUser);
+
+// ✅ TEMP route to seed users (remove or protect later)
+router.post('/seed', async (req, res) => {
+  try {
+    await seedUsers();
+    res.status(200).json({ message: 'Users seeded successfully!' });
+  } catch (error: any) {
+    console.error('Seeding error:', error);
+    res.status(500).json({ message: 'Failed to seed users.' });
+  }
+});
 
 export { router as userRouter };
