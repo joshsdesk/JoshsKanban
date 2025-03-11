@@ -4,20 +4,28 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
+import path from 'path';
 import routes from './routes/index.js';
 import { sequelize } from './models/index.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Serves static files in the entire client's dist folder
+// Middleware
+app.use(express.json());
 app.use(express.static('../client/dist'));
 
-app.use(express.json());
-app.use(routes);
+// API Routes
+app.use('/api', routes);
 
-sequelize.sync({force: forceDatabaseRefresh}).then(() => {
+// Serve React frontend (fallback to index.html for React Router)
+app.get('*', (req, res) => {
+  res.sendFile('index.html', { root: path.join(__dirname, '../client/dist') });
+});
+
+// Sync Database and Start Server
+sequelize.sync({ force: forceDatabaseRefresh }).then(() => {
   app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
   });
 });
