@@ -15,8 +15,8 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.static('../client/dist'));
 
-// API Routes
-app.use('/api', routes);
+// All Routes (auth + api handled inside routes/index.ts)
+app.use('/', routes);
 
 // Serve React frontend (fallback to index.html for React Router)
 app.get('*', (_req, res) => {
