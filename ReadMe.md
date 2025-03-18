@@ -130,4 +130,4 @@ npm run dev
 
 ## License
 
-MIT © [Your Name]
+MIT © 
