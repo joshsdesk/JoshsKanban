@@ -124,6 +124,8 @@ npm run dev
   
 [Live App on Render](https://joshskanban.onrender.com)
 
+[Github Repo](https://github.com/joshsdesk/JoshsKanban)
+
 ---
 
 ## License
